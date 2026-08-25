@@ -17,7 +17,7 @@ export PROJECTS="$HOME/Code"
 export AUTOENV_ENABLE_LEAVE=1
 
 # Core PATH extensions
-export PATH="./bin:/usr/local/bin:/usr/local/sbin:$DOTFILES/bin:$PATH"
+export PATH="./bin:/usr/local/bin:/usr/local/sbin:$DOTFILES/bin:/snap/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
 # Go
