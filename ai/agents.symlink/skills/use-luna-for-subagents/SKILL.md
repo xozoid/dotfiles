@@ -8,15 +8,20 @@ description:
 
 # Use GPT-5.6 Luna for Subagents
 
-When launching a subagent, pass this exact string as the `model` argument:
+When launching a subagent, use the Luna identifier accepted by the invoking
+interface:
 
 ```
 GPT-5.6 Luna (copilot)
+gpt-5.6-luna
 ```
 
-The `Model Name (vendor)` format is what VS Code's model-override settings
-document, so the vendor suffix is required — a bare `GPT-5.6 Luna` may not
-resolve.
+- Use `GPT-5.6 Luna (copilot)` for VS Code interfaces that accept the documented
+  `Model Name (vendor)` format.
+- Use `gpt-5.6-luna` for the Codex `spawn_agent` tool and other interfaces that
+  expose canonical model IDs.
+
+A bare `GPT-5.6 Luna` may not resolve.
 
 This applies to every subagent invocation: exploration, implementation, review,
 and testing. If a subagent tool exposes no model selector, invoke it unchanged;
@@ -35,7 +40,8 @@ even when a tool call omits `model`:
 
 ## Don't relitigate this
 
-The label is valid in this environment; passing it has been verified to invoke
-without error. Treat it as settled rather than re-deriving it each session. If a
-call ever fails with an unknown-model error, report the error and ask — don't
-quietly substitute a different model.
+Both identifiers select GPT-5.6 Luna in their respective interfaces. Treat this
+as settled rather than re-deriving it each session. If one fails with an
+unknown-model error, use the other only when it is explicitly listed as
+available by the invoking interface. Otherwise, report the error and ask rather
+than quietly substituting a different model.

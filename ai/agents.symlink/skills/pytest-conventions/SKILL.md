@@ -52,15 +52,15 @@ Add more files for large feature areas (e.g., `test_filters.py`,
 Every test function follows **Arrange → Act → Assert** order with exactly one
 Act per function.
 
+Do not add `# Arrange`, `# Act`, or `# Assert` phase-label comments. Use blank
+lines to separate the phases when separation improves readability.
+
 ```python
 def test_deposit_increases_balance(account: Account) -> None:
-    # Arrange
     account.balance = Decimal("100.00")
 
-    # Act
     account.deposit(Decimal("50.00"))
 
-    # Assert
     assert account.balance == Decimal("150.00")
 ```
 
@@ -87,18 +87,14 @@ def funded_account() -> Account:
 
 
 def test_deposit_increases_balance(funded_account: Account) -> None:
-    # Act
     funded_account.deposit(Decimal("50.00"))
 
-    # Assert
     assert funded_account.balance == Decimal("150.00")
 
 
 def test_withdraw_decreases_balance(funded_account: Account) -> None:
-    # Act
     funded_account.withdraw(Decimal("30.00"))
 
-    # Assert
     assert funded_account.balance == Decimal("70.00")
 ```
 
@@ -122,10 +118,8 @@ def test_deposit_increases_balance(
     amount: Decimal,
     expected: Decimal,
 ) -> None:
-    # Act
     funded_account.deposit(amount)
 
-    # Assert
     assert funded_account.balance == expected
 ```
 
