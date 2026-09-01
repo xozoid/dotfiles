@@ -115,6 +115,30 @@ return {
           },
         },
         verible = {},
+        yamlls = {
+          before_init = function(_, new_config)
+            new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+              "force",
+              new_config.settings.yaml.schemas or {},
+              require("schemastore").yaml.schemas({
+                replace = {
+                  -- stock fileMatch globs treat every yaml file under any "playbooks/"
+                  -- dir as a playbook: yamlls compiles "*" to match across path
+                  -- separators, so "**/playbooks/*.yaml" also catches
+                  -- playbooks/roles/*/tasks/*.yaml. Drop those globs; use a
+                  -- `# yaml-language-server: $schema=...` modeline in playbook files
+                  -- that aren't named site.yaml/playbook.yaml instead.
+                  ["Ansible Playbook"] = {
+                    name = "Ansible Playbook",
+                    description = "Ansible playbook files",
+                    fileMatch = { "playbook.yml", "playbook.yaml", "site.yml", "site.yaml" },
+                    url = "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook",
+                  },
+                },
+              })
+            )
+          end,
+        },
       },
       inlay_hints = { enabled = false },
     },
