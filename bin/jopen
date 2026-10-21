@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# Opens a Jira issue in the browser: jopen RDTL-658
+#
+set -e
+
+if [ $# -ne 1 ]; then
+    echo "usage: jopen ISSUE-KEY" >&2
+    exit 2
+fi
+
+if [ -z "$JIRA_SERVER" ]; then
+    echo "jopen: JIRA_SERVER is not set (export it in ~/.localrc)" >&2
+    exit 1
+fi
+
+server="$JIRA_SERVER"
+key=$(echo "$1" | tr '[:lower:]' '[:upper:]')
+
+# GTK 3 warns when atk-bridge is listed in GTK_MODULES; it loads natively.
+if [ -n "$GTK_MODULES" ]; then
+    GTK_MODULES=$(echo "$GTK_MODULES" | sed 's/\(^\|:\)atk-bridge//; s/^://')
+    export GTK_MODULES
+fi
+
+xdg-open "${server%/}/browse/$key"
