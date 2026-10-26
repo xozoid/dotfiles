@@ -5,7 +5,7 @@ export DOTFILES="$HOME/.dotfiles"
 export EDITOR='nvim'
 
 # Git credential store
-export GCM_CREDENTIAL_STORE=gpg
+export GCM_CREDENTIAL_STORE=secretservice
 
 # Locale
 export LC_ALL=en_US.UTF-8
