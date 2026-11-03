@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# Opens a pull request in the browser at the remote's URL: propen 750
+#
+set -e
+
+if [ $# -ne 1 ]; then
+    echo "usage: propen PR-NUMBER" >&2
+    exit 2
+fi
+
+remote=$(git remote get-url origin)
+
+# Normalize ssh://git@host:port/o/r.git, git@host:o/r.git, and https://host/o/r.git.
+url=$(echo "$remote" | sed -E \
+    -e 's#^ssh://([^@/]+@)?([^:/]+)(:[0-9]+)?/#https://\2/#' \
+    -e 's#^[^@/:]+@([^:/]+):#https://\1/#' \
+    -e 's#^(https?://)[^@/]+@#\1#' \
+    -e 's#/$##' \
+    -e 's#\.git$##')
+
+# GTK 3 warns when atk-bridge is listed in GTK_MODULES; it loads natively.
+if [ -n "$GTK_MODULES" ]; then
+    GTK_MODULES=$(echo "$GTK_MODULES" | sed 's/\(^\|:\)atk-bridge//; s/^://')
+    export GTK_MODULES
+fi
+
+xdg-open "$url/pull/$1"
