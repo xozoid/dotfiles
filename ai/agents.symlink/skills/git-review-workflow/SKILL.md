@@ -7,11 +7,7 @@ description:
 
 ## Commit policy
 
-When creating commit messages, always include the Co-authored-by trailer:
-
-```
-Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
-```
+Never add a `Co-authored-by` trailer to commit messages.
 
 **Never use `git commit --amend`.** Always create a new commit. The user manages
 commit history and rebasing themselves.
