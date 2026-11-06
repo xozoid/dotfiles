@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Restart every idle zsh in the current tmux session with `exec zsh`.
+#
+# Panes keep their cwd and exported env, and autoenv re-runs for the cwd on
+# startup. Panes running another program (vim, ssh, ...) or in copy mode are
+# skipped. Text typed at a prompt is discarded.
+
+[ -n "$TMUX" ] || { echo "not inside tmux" >&2; exit 1; }
+
+tmux list-panes -s -F '#{pane_id} #{pane_current_command} #{pane_in_mode}' |
+while read -r pane cmd in_mode; do
+    # The pane running this script shows as sh, but its shell is waiting on us.
+    if [ "$pane" = "$TMUX_PANE" ] || { [ "$cmd" = zsh ] && [ "$in_mode" = 0 ]; }; then
+        tmux send-keys -t "$pane" C-u 'exec zsh' Enter
+    else
+        echo "skipped $pane ($cmd)"
+    fi
+done

@@ -23,6 +23,13 @@ export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 # Go
 export PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 
+# SSH/tmux shells lack the desktop's XDG_DATA_DIRS, so xdg-open can't find the
+# snap Firefox entry and opens URLs in a text editor.
+case ":$XDG_DATA_DIRS:" in
+  *:/var/lib/snapd/desktop:*) ;;
+  *) export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share:/usr/share}:/var/lib/snapd/desktop" ;;
+esac
+
 FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="$FNM_PATH:$PATH"

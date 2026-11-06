@@ -25,4 +25,9 @@ if [ -n "$GTK_MODULES" ]; then
     export GTK_MODULES
 fi
 
+# SSH/tmux shells lack WAYLAND_DISPLAY; snap Firefox then fails with "cannot open display".
+if [ -z "$WAYLAND_DISPLAY" ] && [ -S "$XDG_RUNTIME_DIR/wayland-0" ]; then
+    export WAYLAND_DISPLAY=wayland-0
+fi
+
 xdg-open "$url/pull/$1"

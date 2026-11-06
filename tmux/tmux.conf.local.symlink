@@ -349,10 +349,11 @@ tmux_conf_copy_to_os_clipboard=false
 # this is the place to override or undo settings
 
 # -- tchat ---------------------------------------------------------------------
-if-shell '[ "$(hostname)" = "braddavilxpc" ]' \
-  'set-hook -g after-select-window "run-shell -b \\\"/home/braddavi/Code/playground/.venv/bin/tchat sync\\\"" \\; \
-   set-hook -g session-window-changed "run-shell -b \\\"/home/braddavi/Code/playground/.venv/bin/tchat sync\\\"" \\; \
-   set-hook -g client-session-changed "run-shell -b \\\"/home/braddavi/Code/playground/.venv/bin/tchat sync\\\""'
+if-shell '[ "$(hostname)" = "braddavilxpc" ]' {
+  set-hook -g after-select-window 'run-shell -b "/home/braddavi/Code/playground/.venv/bin/tchat sync"'
+  set-hook -g session-window-changed 'run-shell -b "/home/braddavi/Code/playground/.venv/bin/tchat sync"'
+  set-hook -g client-session-changed 'run-shell -b "/home/braddavi/Code/playground/.venv/bin/tchat sync"'
+}
 
 # start with mouse mode enabled
 set -g mouse on
