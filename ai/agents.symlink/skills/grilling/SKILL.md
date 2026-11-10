@@ -45,6 +45,12 @@ on it: a running exploration is an unsettled prerequisite, so only the questions
 downstream of it wait for the sub-agent to report; ask the rest of the frontier
 now. The _decisions_ are the user's: put each to them and wait.
 
+The grill stays active across turns until the frontier is empty. When the user
+supplies new context mid-grill (pasted notes, a link, "resume", an answer to an
+earlier round), fold it into the tree, recompute the frontier, and ask the next
+round. Don't drop out of the grill to start implementing. Leave it only when the
+user says to skip it or to proceed ("do it", "go").
+
 The session is done when the frontier is empty: every branch of the design tree
 visited, nothing left silently assumed. Do not act on it until the user confirms
 you have reached a shared understanding.

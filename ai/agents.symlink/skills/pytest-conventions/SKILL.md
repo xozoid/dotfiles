@@ -86,9 +86,20 @@ assert handler.mailhost == "relay.example.com"
 assert handler.mailport == 25
 ```
 
-Comparing a function's tuple return value to an expected tuple is fine. To check
-that many fields are unchanged, compare dicts keyed by field name so the diff
-names the field.
+If the value has named fields (NamedTuple, dataclass, model, result object),
+assert each field with dot notation. Never compare it to a tuple literal, even
+when it is a tuple at runtime. Comparing to a tuple is fine only for a plain
+unnamed tuple return. To check that many fields are unchanged, compare dicts
+keyed by field name so the diff names the field.
+
+When many tests repeat the same few attribute asserts, add a one-line helper
+that returns the attribute list (e.g. `rules(result)`) and assert on that.
+
+### Split tests that share Arrange but not Assert
+
+If one test loops over cases or checks several unrelated outcomes after the same
+setup, move the setup to a fixture and write one test per outcome. Use
+parametrize when the outcomes differ only by data.
 
 ### Deduplicating Arrange with fixtures
 
@@ -142,6 +153,24 @@ def test_deposit_increases_balance(
 ```
 
 Prefer parametrize over copying nearly-identical test functions.
+
+### Reuse existing fixtures first
+
+Before writing a fixture or building objects in a test body, read every
+`conftest.py` from the test's directory up to `tests/`. Use the project's
+fixtures (app, client, session, project, sample data) instead of rebuilding the
+same thing locally.
+
+Request a fixture as a test parameter. Use `@pytest.mark.usefixtures` only for
+fixtures needed for a side effect whose value the test never reads.
+
+### Test data in files
+
+Put multiline input data (TOML, CSV, JSON, HTML, config files) in files under
+`tests/data/<topic>/`, one file per case, named after the case
+(`bad_format.toml`, `missing_config.toml`). Load them in the test or a fixture.
+Don't embed multiline strings in test modules or build the data in code when a
+file would do.
 
 ## Import rules
 

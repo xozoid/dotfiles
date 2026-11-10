@@ -2,9 +2,33 @@
 name: use-luna-for-subagents
 user-invocable: false
 description:
-  "Use when launching or delegating work to subagents; use GPT-6 Luna for every
-  subagent invocation."
+  "Use for any task that spans several files, needs research, or audits code:
+  delegate to subagents by default, and use GPT-6 Luna for every subagent
+  invocation."
 ---
+
+# Delegate to subagents by default
+
+The user should not have to say "use subagents". Delegate by default when a
+task:
+
+- touches more than one or two files,
+- needs exploration or research before acting,
+- audits or reviews code against requirements, or
+- splits into independent parts that can run in parallel.
+
+Keep in the main session: planning, decisions that need the user, integrating
+results, and final verification. Do small single-file edits and quick answers
+directly.
+
+Give each subagent a self-contained brief: goal, files or areas in scope,
+whether it may edit (use a read-only agent such as `Explore` when it may not),
+and what to report back. Pass along the user's standing rules, since subagents
+don't inherit them: no staging, stashing, resetting, or committing; scratch
+files go in `.scratch/`.
+
+Check subagent results before reporting them. Re-read the key file or re-run the
+test rather than relaying a claim unchecked.
 
 # Use GPT-6 Luna for Subagents
 
