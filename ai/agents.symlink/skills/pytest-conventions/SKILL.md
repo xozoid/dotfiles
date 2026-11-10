@@ -72,6 +72,24 @@ def test_deposit_increases_balance(account: Account) -> None:
 Never put two Act calls in one test. If you need to verify two behaviors, write
 two tests.
 
+### One assert per value
+
+Don't pack separate values into a tuple just to compare them in one assert. A
+failure then reports only a position, not which field broke.
+
+```python
+# Bad
+assert (handler.mailhost, handler.mailport) == ("relay.example.com", 25)
+
+# Good
+assert handler.mailhost == "relay.example.com"
+assert handler.mailport == 25
+```
+
+Comparing a function's tuple return value to an expected tuple is fine. To check
+that many fields are unchanged, compare dicts keyed by field name so the diff
+names the field.
+
 ### Deduplicating Arrange with fixtures
 
 When multiple tests share the same setup, extract it into a fixture instead of
