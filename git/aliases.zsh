@@ -1,4 +1,5 @@
 alias gG='git grep'
+alias glG='git log --grep'
 alias gdh='git diff HEAD'
 alias gdhs='git diff HEAD --stat'
 alias gdm='git diff $(git_main_branch)'
