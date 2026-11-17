@@ -11,6 +11,11 @@ description:
 Use the `gh` CLI for GitHub interaction (PRs, issues, reviews, checks, releases,
 API calls) instead of GitHub MCP tools, unless `gh` cannot do the job.
 
+Always redirect `gh` output to a file: `gh ... > .scratch/out.txt 2>&1`. With
+stdout on the terminal, any `gh` command (`gh pr list`, `gh api`,
+`gh api graphql`) can open a pager that wedges the agent terminal for the rest
+of the session.
+
 ## Pull request template
 
 Before creating a PR, look for a template and use it as the PR body:

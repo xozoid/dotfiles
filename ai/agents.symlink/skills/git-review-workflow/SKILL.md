@@ -1,9 +1,23 @@
 ---
 name: git-review-workflow
 description:
-  Personal git workflow preferences - commit policy, respecting user edits. Use
-  when working in any git repository.
+  Personal git workflow preferences - index and working tree, commit policy,
+  respecting user edits. Use when working in any git repository.
 ---
+
+## Index and working tree
+
+Never touch the git index: no `git add`, `git stash`, `git checkout -- <file>`,
+`git restore`, or `git reset`. The user stages what they has reviewed so they
+can diff follow-on work against it. To compare with another revision, use
+`git show HEAD:<path>` or `git diff main...HEAD`.
+
+Do not commit unless asked. Leave changes in the working tree for review.
+
+Never create a git worktree without asking. Work in the existing checkouts; if a
+new branch is needed, ask which checkout to use.
+
+Subagents don't inherit these rules. Pass them along in every brief.
 
 ## Commit policy
 

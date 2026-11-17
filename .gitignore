@@ -1,1 +1,3 @@
 git/gitconfig.local.symlink
+# SEL-internal skills stay local; this repo is public.
+ai/agents.symlink/skills/sel-*/

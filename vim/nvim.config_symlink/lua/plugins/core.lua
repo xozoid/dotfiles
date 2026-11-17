@@ -40,12 +40,19 @@ return {
       picker = {
         sources = {
           files = {
+            ignored = true,
             hidden = true,
+            exclude = { ".git", "node_modules" },
           },
           grep = {
+            ignored = true,
             hidden = true,
+            exclude = { ".git", "node_modules" },
           },
           explorer = {
+            ignored = true,
+            hidden = true,
+            exclude = { ".git", "node_modules" },
             auto_close = true,
             layout = {
               layout = { position = "right" },
