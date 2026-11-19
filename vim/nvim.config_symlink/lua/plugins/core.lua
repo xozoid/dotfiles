@@ -42,18 +42,36 @@ return {
           files = {
             ignored = true,
             hidden = true,
-            exclude = { "__pycache__", ".git", ".pytest_cache", ".ruff_cache", ".venv", "*.egg-info", "node_modules" },
+            exclude = {
+              "__pycache__",
+              ".git",
+              ".pytest_cache",
+              ".ruff_cache",
+              ".venv",
+              "*.egg-info",
+              "build",
+              "node_modules",
+            },
           },
           grep = {
             ignored = true,
             hidden = true,
-            exclude = { "__pycache__", ".git", ".pytest_cache", ".ruff_cache", ".venv", "*.egg-info", "node_modules" },
+            exclude = {
+              "__pycache__",
+              ".git",
+              ".pytest_cache",
+              ".ruff_cache",
+              ".venv",
+              "*.egg-info",
+              "build",
+              "node_modules",
+            },
           },
           explorer = {
             ignored = true,
             hidden = true,
             -- Not .venv, I don't want to see when searching but when moving within installed packages via explorer
-            exclude = { "__pycache__", ".git", ".pytest_cache", ".ruff_cache", "*.egg-info", "node_modules" },
+            exclude = { "__pycache__", ".git", ".pytest_cache", ".ruff_cache", "*.egg-info", "build", "node_modules" },
             auto_close = true,
             layout = {
               layout = { position = "right" },

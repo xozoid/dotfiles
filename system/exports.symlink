@@ -1,4 +1,4 @@
-# Core dotfiles path — used by PATH below
+# Core dotfiles path - used by PATH below
 export DOTFILES="$HOME/.dotfiles"
 
 # Editor
