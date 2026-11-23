@@ -6,6 +6,7 @@ alias gdm='git diff $(git_main_branch)'
 alias gdms='git diff $(git_main_branch) --stat'
 alias gsha='git rev-parse HEAD'
 alias gundo='git reset --soft HEAD^'
+alias gsnut='git status --short --untracked-files=no'
 
 gppr() {
     local branch
