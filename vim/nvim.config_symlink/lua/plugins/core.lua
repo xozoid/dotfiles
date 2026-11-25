@@ -46,6 +46,7 @@ return {
               "__pycache__",
               ".git",
               ".pytest_cache",
+              ".scratch",
               ".ruff_cache",
               ".venv",
               "*.egg-info",
@@ -60,6 +61,7 @@ return {
               "__pycache__",
               ".git",
               ".pytest_cache",
+              ".scratch",
               ".ruff_cache",
               ".venv",
               "*.egg-info",
@@ -70,7 +72,7 @@ return {
           explorer = {
             ignored = true,
             hidden = true,
-            -- Not .venv, I don't want to see when searching but when moving within installed packages via explorer
+            -- Not .venv nor .scratch, I don't want to see when searching but when moving within installed packages via explorer
             exclude = { "__pycache__", ".git", ".pytest_cache", ".ruff_cache", "*.egg-info", "build", "node_modules" },
             auto_close = true,
             layout = {
